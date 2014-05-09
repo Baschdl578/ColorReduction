@@ -53,7 +53,7 @@ public class ColorReduction_Test {
     }
 
 
-    @After void TearDown() {
+    @After public void TearDown() {
     }
 
 }
