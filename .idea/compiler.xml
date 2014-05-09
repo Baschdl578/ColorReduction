@@ -25,6 +25,9 @@
         <module name="PNG Color Reduction" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PNG Color Reduction" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
