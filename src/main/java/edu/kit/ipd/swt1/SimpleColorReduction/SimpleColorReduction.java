@@ -33,9 +33,11 @@ public class SimpleColorReduction implements ColorReduction {
         for (int i = source.getMinY(); i < source.getHeight(); i++) {
             for (int j = source.getMinX(); j < source.getWidth(); j++) {
                 int rgb = source.getRGB(j, i);
-                int red = (rgb >> 16) & 0x000000FF;
-                int green = (rgb >>8 ) & 0x000000FF;
-                int blue = (rgb) & 0x000000FF;
+                Color color = new Color(rgb);
+                int red = color.getRed();
+                int green = color.getGreen();
+                int blue = color.getBlue();
+                int alpha = color.getAlpha();
 
                 int newRed = 0;
                 int newGreen = 0;
@@ -57,7 +59,7 @@ public class SimpleColorReduction implements ColorReduction {
 
                     temp = temp + divider;
                 }
-                Color newColors = new Color(newRed, newGreen, newBlue);
+                Color newColors = new Color(newRed, newGreen, newBlue, alpha);
 
                 target.setRGB(j, i, newColors.getRGB());
             }
