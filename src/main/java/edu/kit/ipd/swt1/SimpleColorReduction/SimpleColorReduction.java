@@ -51,7 +51,7 @@ public class SimpleColorReduction implements ColorReduction {
 
                 //Get old colors and Alpha
                 int rgb = source.getRGB(j, i);
-                Color color = new Color(rgb);
+                Color color = new Color(rgb, true);
                 int red = color.getRed();
                 int green = color.getGreen();
                 int blue = color.getBlue();
