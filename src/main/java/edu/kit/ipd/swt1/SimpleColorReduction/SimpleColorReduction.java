@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 
 /**
+ * Reduces the Bitdepth of an Image
  * Created by Sebastian Schindler on 08.05.2014.
  */
 public class SimpleColorReduction implements ColorReduction {
@@ -12,18 +13,33 @@ public class SimpleColorReduction implements ColorReduction {
     private BufferedImage target;
     private int targetDepth;
 
+    /**
+     * Setter for the source Image
+     * @param mySourceImage new BufferedImage
+     */
     public void setSourceImage(BufferedImage mySourceImage) {
         this.source = mySourceImage;
     }
 
+    /**
+     * Setter for the new Depth
+     * @param myDestBitDepth new depth (int divisible by 3)
+     */
     public void setDestBitDepth(Integer myDestBitDepth) {
         this.targetDepth = myDestBitDepth;
     }
 
+    /**
+     * Getter for the reduced Image
+     * @return new Image
+     */
     public BufferedImage getReducedImage() {
         return this.target;
     }
 
+    /**
+     * Genereates the reducedImage
+     */
     public void generateImage() {
         double divider = 256 / (((double) targetDepth) / 3);
 
@@ -32,6 +48,8 @@ public class SimpleColorReduction implements ColorReduction {
         // Does this for every pixel:
         for (int i = source.getMinY(); i < source.getHeight(); i++) {
             for (int j = source.getMinX(); j < source.getWidth(); j++) {
+
+                //Get old colors and Alpha
                 int rgb = source.getRGB(j, i);
                 Color color = new Color(rgb);
                 int red = color.getRed();
@@ -43,6 +61,7 @@ public class SimpleColorReduction implements ColorReduction {
                 int newGreen = 0;
                 int newBlue = 0;
 
+                //Set new colors
                 double temp = 0;
                 while (temp <= 255) {
                     int lower = (int) Math.round(temp);
@@ -59,17 +78,18 @@ public class SimpleColorReduction implements ColorReduction {
 
                     temp = temp + divider;
                 }
+                //Create new Image with old Alpha and new colors
                 Color newColors = new Color(newRed, newGreen, newBlue, alpha);
-
                 target.setRGB(j, i, newColors.getRGB());
             }
         }
 
     }
 
-
-
-
+    /**
+     * Getter for the source Image
+     * @return source image as BufferedImage
+     */
     public BufferedImage getSource() {
         return this.source;
     }
