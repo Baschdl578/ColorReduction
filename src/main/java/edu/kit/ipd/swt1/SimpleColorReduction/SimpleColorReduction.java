@@ -41,7 +41,7 @@ public class SimpleColorReduction implements ColorReduction {
      * Genereates the reducedImage
      */
     public void generateImage() {
-        double divider = 256 / (Math.pow(2, ((double) targetDepth)) / 3);
+        double divider = 256 / (Math.pow(2, (double) targetDepth) / 3);
 
         target = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
 
@@ -69,10 +69,10 @@ public class SimpleColorReduction implements ColorReduction {
                     if (red >= lower && red < upper) {
                         newRed = lower;
                     }
-                    if (green >= lower && green < upper) {
+                    if (green >= lower && green <= upper) {
                         newGreen = lower;
                     }
-                    if (blue >= lower && blue < upper) {
+                    if (blue >= lower && blue <= upper) {
                         newBlue = lower;
                     }
 
