@@ -69,10 +69,10 @@ public class SimpleColorReduction implements ColorReduction {
                     if (red >= lower && red < upper) {
                         newRed = lower;
                     }
-                    if (green >= lower && green <= upper) {
+                    if (green >= lower && green < upper) {
                         newGreen = lower;
                     }
-                    if (blue >= lower && blue <= upper) {
+                    if (blue >= lower && blue < upper) {
                         newBlue = lower;
                     }
 
