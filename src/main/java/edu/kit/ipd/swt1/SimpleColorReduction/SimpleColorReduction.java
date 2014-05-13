@@ -41,7 +41,7 @@ public class SimpleColorReduction implements ColorReduction {
      * Genereates the reducedImage
      */
     public void generateImage() {
-        double divider = 256 / (Math.pow(2, (double) targetDepth) / 3);
+        double divider = 256 / (Math.pow(2, ((double) targetDepth) / 3));
 
         target = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
 
