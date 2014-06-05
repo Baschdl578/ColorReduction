@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.BorderPane;
@@ -46,9 +47,15 @@ public class UI extends Application {
         chooseSource.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                File source = (new FileChooser()).showOpenDialog(primaryStage);
-                inputFile = source.toString();
-                sourcePath.setText(inputFile);
+                FileChooser chooser = new FileChooser();
+                chooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("PNG Images", "*.png")
+                );
+                File source = chooser.showOpenDialog(primaryStage);
+                if (source != null) {
+                    inputFile = source.toString();
+                    sourcePath.setText(inputFile);
+                }
             }
         });
 
@@ -66,8 +73,14 @@ public class UI extends Application {
         targetButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                File target = (new FileChooser()).showSaveDialog(primaryStage);
-                outputFile = target.toString();
+                FileChooser chooser = new FileChooser();
+                chooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("PNG Images", "*.png")
+                );
+                File target = chooser.showSaveDialog(primaryStage);
+                if (target != null) {
+                    outputFile = target.toString();
+                }
             }
         });
 
@@ -77,9 +90,20 @@ public class UI extends Application {
 
         BorderPane slider = new BorderPane();
 
-        Button test3 = new Button();
-        test3.setText("Sssssssssssssssssssssssliiiiiiiiiiiiiiiiideer Placeholder");
-        slider.setCenter(test3);
+
+        final Slider depthSlider = new Slider();
+        depthSlider.setMin(3.0);
+        depthSlider.setMax(24.0);
+        depthSlider.setValue(3.0);
+        depthSlider.setBlockIncrement(3.0);
+        depthSlider.setMajorTickUnit(3.0);
+        depthSlider.setShowTickMarks(true);
+        depthSlider.setShowTickLabels(true);
+        depthSlider.setBlockIncrement(3.0);
+        depthSlider.setMinorTickCount(0);
+        depthSlider.setSnapToTicks(true);
+
+        slider.setCenter(depthSlider);
 
         BorderPane startButton = new BorderPane();
         Button startGen = new Button();
@@ -87,7 +111,7 @@ public class UI extends Application {
         startGen.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Main.genStrings(inputFile, outputFile, 3);
+                Main.genStrings(inputFile, outputFile, (int) depthSlider.getValue());
             }
         });
         startButton.setCenter(startGen);
@@ -103,7 +127,7 @@ public class UI extends Application {
         root.setRightAnchor(slider, 10.0);
         root.setBottomAnchor(slider, 100.0);
 
-        root.setBottomAnchor(startButton, 10.0);
+        root.setBottomAnchor(startButton, 30.0);
         root.setLeftAnchor(startButton, 5.0);
         root.setRightAnchor(startButton, 5.0);
 
