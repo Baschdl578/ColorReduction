@@ -1,5 +1,6 @@
 package edu.kit.ipd.swt1.SimpleColorReduction;
 
+import javafx.application.Application;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -11,6 +12,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 /**
  * Hauptklasse der Kommandozeilenschnittstelle zu
@@ -34,8 +36,13 @@ final class Main {
      *            Kommandozeilenargumente vom Benutzer
      */
     public static void main(String[] args) {
-        CommandLine cmd = doCommandLineParsing(args);
-
+        CommandLine cmd;
+        if (args.length != 0) {
+            cmd = doCommandLineParsing(args);
+        } else {
+            fromUI();
+            return;
+        }
 		/*
 		 * Fügen Sie hier Anweisungen zum Einlesen einer PNG-Datei gemäß der
 		 * Hinweise auf dem Übungblatt ein.
@@ -125,5 +132,20 @@ final class Main {
                             + exception.getMessage());
         }
         return line;
+    }
+
+    public static void fromUI() {
+        UI.main(null);
+    }
+
+    public static void genStrings(String in, String out, int depth) {
+        String[] args = new String[6];
+        args[0] = "-s";
+        args[1] = in;
+        args[2] = "-d";
+        args[3] = out;
+        args[4] = "-c";
+        args[5] = Integer.toString(depth);
+        Main.main(args);
     }
 }
