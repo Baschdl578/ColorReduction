@@ -1,6 +1,5 @@
 package edu.kit.ipd.swt1.SimpleColorReduction;
 
-import javafx.application.Application;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -12,7 +11,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 /**
  * Hauptklasse der Kommandozeilenschnittstelle zu
@@ -134,10 +132,19 @@ final class Main {
         return line;
     }
 
+    /**
+     * Starts the UI for the application
+     */
     public static void fromUI() {
         UI.main(null);
     }
 
+    /**
+     * Builds the Strings from the UI and starts generating the image
+     * @param in Path to source image
+     * @param out Path to target image
+     * @param depth target bitdepth
+     */
     public static void genStrings(String in, String out, int depth) {
         String[] args = new String[6];
         args[0] = "-s";
