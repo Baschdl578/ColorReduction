@@ -35,7 +35,7 @@ final class Main {
      */
     public static void main(String[] args) {
         CommandLine cmd;
-        if (args.length != 0) {
+        if (args.length == 6) {
             cmd = doCommandLineParsing(args);
         } else {
             fromUI();
